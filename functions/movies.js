@@ -16,7 +16,7 @@ exports.handler = async () => {
     `,
   });
 
-  const api = new URL("https://www.omdbapi.com/");
+  const api = new URL("http://www.omdbapi.com/");
 
   // add the secret API key to the query string
   api.searchParams.set("apikey", process.env.OMDB_API_KEY);
