@@ -95,7 +95,7 @@
   async function initialize() {
     const movies = await fetch("/.netlify/functions/movies")
       .then((res) => {
-        console.log(movies);
+        console.log(res);
         res.json();
       })
       .catch((err) => console.error(err));
