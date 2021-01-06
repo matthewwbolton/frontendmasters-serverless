@@ -70,6 +70,11 @@
   </div>
 </template>
 
+<script
+  type="text/javascript"
+  src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+></script>
+
 <script>
   function addScores(element, scores) {
     scores.forEach((score) => {
@@ -110,7 +115,6 @@
 
       element.querySelector("h2").innerText = movie.title;
       element.querySelector(".tagline").innerText = movie.tagline;
-
 
       addScores(element, movie.scores);
 
