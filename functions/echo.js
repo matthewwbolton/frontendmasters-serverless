@@ -3,6 +3,6 @@ exports.handler = async (event) => {
 
   return {
     statusCode: 200,
-    body: `You said: ${text}`,
+    body: `You said ${text}`,
   };
 };
