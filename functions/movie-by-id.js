@@ -1,4 +1,4 @@
-const movies = require('../data/movies.json');
+const movies = require("../data/movies.json");
 
 exports.handler = async ({ queryStringParameters }) => {
   const { id } = queryStringParameters;
@@ -7,7 +7,7 @@ exports.handler = async ({ queryStringParameters }) => {
   if (!movie) {
     return {
       statusCode: 404,
-      body: 'Not Found',
+      body: "Not Found",
     };
   }
 
