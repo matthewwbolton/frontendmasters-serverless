@@ -77,7 +77,7 @@
       const label = document.createElement("span");
       label.classList.add("source");
 
-      //shorten the long name to make the layout look nice
+      // shorten the long name so the layout looks nice
       label.innerText =
         score.Source === "Internet Movie Database" ? "IMDb" : score.Source;
       item.appendChild(label);
@@ -87,21 +87,16 @@
       item.appendChild(value);
 
       const scoreElement = element.querySelector(".scores");
-
       scoreElement.appendChild(item);
     });
   }
 
   async function initialize() {
-    const movies = await fetch("/.netlify/functions/movies")
-      .then((res) => {
-        console.log(res);
-        res.json();
-      })
-      .catch((err) => console.error(err));
+    const movies = await fetch("/.netlify/functions/movies").then((response) =>
+      response.json()
+    );
 
     const container = document.querySelector(".movies");
-
     const template = document.querySelector("#movie-template");
 
     movies.forEach((movie) => {
