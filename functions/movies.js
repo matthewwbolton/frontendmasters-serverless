@@ -5,29 +5,28 @@ const { query } = require("./util/hasura");
 exports.handler = async () => {
   const { movies } = await query({
     query: `
-        query {
-            movies {
-                id
-                poster
-                tagline
-                title
-            }
+      query {
+        movies {
+          id
+          title
+          tagline
+          poster
         }
-        `,
+      }
+    `,
   });
 
-  const api = new URL("http://www.omdbapi.com/");
+  const api = new URL("https://www.omdbapi.com/");
 
-  // Add the secret API key
+  // add the secret API key to the query string
   api.searchParams.set("apikey", process.env.OMDB_API_KEY);
 
   const promises = movies.map((movie) => {
-    //use the movie's IMDB ID to look up details
+    // use the movie’s IMDb/OMDb ID to look up details
     api.searchParams.set("i", movie.id);
 
     return fetch(api)
-      .then((res) => res.json())
-
+      .then((response) => response.json())
       .then((data) => {
         const scores = data.Ratings;
 
@@ -39,7 +38,7 @@ exports.handler = async () => {
   });
 
   // awaiting all Promises lets the requests happen in parallel
-  // see: https://lwj.dev/blog/keep-async-await-from-blocking-execution
+  // see: https://lwj.dev/blog/keep-async-await-from-blocking-execution/
   const moviesWithRatings = await Promise.all(promises);
 
   return {
