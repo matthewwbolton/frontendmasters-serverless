@@ -1,6 +1,6 @@
-const { URL } = require("url");
-const fetch = require("node-fetch");
-const { query } = require("./util/hasura");
+const { URL } = require('url');
+const fetch = require('node-fetch');
+const { query } = require('./util/hasura');
 
 exports.handler = async () => {
   const { movies } = await query({
@@ -27,6 +27,7 @@ exports.handler = async () => {
 
     return fetch(api)
       .then((res) => res.json())
+
       .then((data) => {
         const scores = data.Ratings;
 
@@ -36,7 +37,9 @@ exports.handler = async () => {
         };
       });
   });
-
+  
+  // awaiting all Promises lets the requests happen in parallel
+  // see: https://lwj.dev/blog/keep-async-await-from-blocking-execution
   const moviesWithRatings = await Promise.all(promises);
 
   return {

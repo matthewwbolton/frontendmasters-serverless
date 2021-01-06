@@ -87,6 +87,7 @@
       item.appendChild(value);
 
       const scoreElement = element.querySelector(".scores");
+
       scoreElement.appendChild(item);
     });
   }
@@ -109,6 +110,7 @@
 
       element.querySelector("h2").innerText = movie.title;
       element.querySelector(".tagline").innerText = movie.tagline;
+
 
       addScores(element, movie.scores);
 
